@@ -31,7 +31,22 @@ The function that performs modulo arithmetic is `mod`. Here are a few examples o
 (shift \b 20) ; result \v
 (shift \z 3) ; result \c
 ```
+Note: if you shift by a negative number, you are performing a reverse operation. For instance, `(shift \d -3)` gives you `\a`. Thus decryption is just using the same function, but with the opposite (negative) key. 
+
+Now we are done with the nitty-gritty details for our ciphers, and are ready to do some encryption and decryption. 
 
 ## Working with words: sequences, `map`
+Now you can "encrypt" a letter, but you probably want to encrypt words. If you were writing a program in python or Java, you probably would be thinking of writing a loop. However, in Clojure we use *higher-order functions* that traverse sequences for us, and we just need to specify what operation we would like to perform on each element. 
+
+`map` is one of such higher-order functions. It takes in a sequence of elements and a function, and returns a sequence that results from applying the given function to each element. 
+
+This sounds very abstract, so let's look at an example. We use a function `inc` (increment) that takes an integer and returns the next integer, i.e. `(inc 1)` returns 2. now we are going to increment each element of a sequence of numbers
+using `map`:
+```clojure
+(map inc [1 2 3]) ; returns (2 3 4)
+```
+Here `[1 2 3]` is a sequence of numbers (
+
+**To-do: mention posting encryptions on slack**
 
 ## Working with strings
