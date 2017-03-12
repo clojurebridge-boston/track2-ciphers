@@ -43,9 +43,39 @@ Now you can "encrypt" a letter, but you probably want to encrypt words. If you w
 This sounds very abstract, so let's look at an example. We use a function `inc` (increment) that takes an integer and returns the next integer, i.e. `(inc 1)` returns 2. now we are going to increment each element of a sequence of numbers
 using `map`:
 ```clojure
-(map inc [1 2 3]) ; returns (2 3 4)
+(map inc [1 3 2]) ; returns (2 4 3)
 ```
-Here `[1 2 3]` is a sequence of numbers (
+Here `[1 3 2]` is a *vector* of numbers. This is the easiest way of giving Clojure a collection of elements in a specific order. What you get back is also an ordered collection of elements, each of them is incremented by 1. The reason it appears in parentheses is because it's a slightly different type of a collection. We will not worry about these details now, just remember that when you are giving Clojure a collection of items, the easiest way to write it is a vector.
+
+**Exercise:** What do you expect when you type in Clojure REPL?
+```clojure
+(map to-int [\a \b \c])
+``` 
+Try it, see if the result is what you were expecting. If it's not, make sure to understand what it is and why. 
+
+**Exercise:** Copy the following definition of the function 
+`square` into the definitions panel of Nightcode (right upper panel): 
+```clojure
+(defn square
+  "Takes a nubmer and returns its square"
+  [x]
+  (* x x))
+```
+Reload the file. Now in the REPL panel **type in** an expression, **using `map`**, that computes the squares of numbers `[1 3 -2]`.
+
+### Using anonymous functions
+Maps are often used together with anonymous functions. These
+are one-time-use functions that are put together "on the fly" and not given a name. they also don't given names to their parameters, referring to them as `%1, %2, %3` - or just `%` if there is only one. 
+
+They are often used with higher-order functions, such as `map`. Here is an example:
+```clojure
+(map #(* % %) [1 3 -2])
+``` 
+This returns `(map #(* % %) [1 3 -2])` (the sequence of squares of all given numbers, just like in the exercise above). 
+The anonymous function passed to the `map` is `#(* % %)`. It is equivalent to the `square` function above. The `%` sign here refers to the parameter of the function, it is used instead of `x`. The `#` in front of the expression indicates that this is a function. 
+      
+**Exercise:** 
+
 
 **To-do: mention posting encryptions on slack**
 
