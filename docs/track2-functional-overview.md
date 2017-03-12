@@ -5,3 +5,5 @@
 Clojure is a functional language. 
 
 ## Clojure Syntax 
+
+To-do: mention comments
