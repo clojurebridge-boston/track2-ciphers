@@ -57,7 +57,7 @@ Try it, see if the result is what you were expecting. If it's not, make sure to 
 `square` into the definitions panel of Nightcode (right upper panel): 
 ```clojure
 (defn square
-  "Takes a nubmer and returns its square"
+  "Takes a number and returns its square"
   [x]
   (* x x))
 ```
@@ -74,7 +74,26 @@ They are often used with higher-order functions, such as `map`. Here is an examp
 This returns `(map #(* % %) [1 3 -2])` (the sequence of squares of all given numbers, just like in the exercise above). 
 The anonymous function passed to the `map` is `#(* % %)`. It is equivalent to the `square` function above. The `%` sign here refers to the parameter of the function, it is used instead of `x`. The `#` in front of the expression indicates that this is a function. 
       
-**Exercise:** 
+**Exercise:** Use `map` and an anonymous function to take the opposite of each number in a given vector. For instance, if the vector is `[2 -1 0 3]`, the result would be `[-2 1 0 -3]`.
+
+### Converting between strings and sequences 
+`map` is very convenient for working with sequences. Strings, however, are not a sequence of characters, so some conversion is needed. 
+
+In order to convert from a string to a sequence of characters, you can use a `seq` function: 
+```clojure
+(seq "word") ; results in a sequence (\w \o \r \d)
+```
+
+The reverse conversion is a bit less obvious:
+```clojure
+(apply str [\w \o \r \d]) ; results in a string "word"
+```
+Here a sequence of characters is given as a vector. 
+
+**Explanations of `apply` (you can skip this):**
+TO-DO: add a link to Clojure docs. 
+
+### Encrypting with Caesar cipher
 
 
 **To-do: mention posting encryptions on slack**
