@@ -95,6 +95,17 @@ TO-DO: add a link to Clojure docs.
 
 ### Encrypting with Caesar cipher
 
+Now we can encrypt words with Caesar cipher. Let's say we want to encrypt the word "apple" by shifting the alphabet by 20. We need to do the following steps:
+1. make the word into a sequence by using `seq` function
+2. use `map` to shift each letter in the sequence by 20 positions; we can write the actual shifting as an anonymous function that uses the function `shift` that we wrote earlier.
+3. use `apply str` to convert the result from a sequence to a string. 
+
+Feel free to write this out on a paper (or in Nightcode) before you look at the next example. 
+
+**To-do: first write a step-by-step one with defs. 
+```clojure 
+(apply str (map #(shift % 20) (seq "apple")))
+```
 
 **To-do: mention posting encryptions on slack**
 

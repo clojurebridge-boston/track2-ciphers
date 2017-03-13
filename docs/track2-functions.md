@@ -59,8 +59,4 @@ Also note that we added a description of the function, a so-called doc-string. I
 
 **Exercise:** write a reverse conversion function `to-char`, i.e. a function that takes a number between 0 and 25 (inclusive) and returns the corresponding lowercase letter. For instance, `(to-char 3)` should return `\d`.  
 
-## Caesar cipher 
-
-## Working with words: sequences, `map`
-
-## Working with strings
+**Next: ** [Caesar cipher; Clojure higher order functions](track2-caesar.md)
