@@ -6,7 +6,7 @@ Clojure is a functional language on top of the Java programming language. Thus C
 
 Ciphers that we will be exploring in this lesson work with letters that are represented as a character `char` type. However, they are treated as integer numbers `int` to make mathematics of encryption work. Letters form strings, which are a datatype different from characters. 
 
-## Clojure constants and functions
+## Defining Clojure constants and functions
 
 Constants are declared using the keyword `def`:
 ```clojure
@@ -34,6 +34,8 @@ This will return `105`.
 
 ## Converting between `int` and `char`
 
+*Relevant functions on clojuredocs*: [int](https://clojuredocs.org/clojure.core/int), [char](https://clojuredocs.org/clojure.core/char)
+
 Now we will write some
 conversion functions between `int` and `char` types. 
 
@@ -59,4 +61,4 @@ Also note that we added a description of the function, a so-called doc-string. I
 
 **Exercise:** write a reverse conversion function `to-char`, i.e. a function that takes a number between 0 and 25 (inclusive) and returns the corresponding lowercase letter. For instance, `(to-char 3)` should return `\d`.  
 
-**Next: ** [Caesar cipher; Clojure higher order functions](track2-caesar.md)
+**Next:** [Caesar cipher; Clojure higher order functions](track2-caesar.md)

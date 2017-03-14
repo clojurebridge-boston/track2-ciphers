@@ -1,20 +1,24 @@
 #Caesar cipher
 
 ## Letter shift 
+*Relevant functions on clojuredocs:* [+](), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
+
+**to-do** a link to https://clojuredocs.org/clojure.core/+ is having an issue: + is interpreted as redirect. 
+
 Caesar cipher works by shifting the alphabet by a given number of positions to the right, wrapping around at the end. 
 The key for the cipher is how many positions the letters are shifted by. 
-For instance, if the key is 3 then `a` is replaced by `d`, `b` by `e`, etc. Here is the complete replacement:
+For instance, if the key is 3 then `a` is replaced by `d`, `b` by `e`, etc. Here is the shift of the entire alphabet:
 ```
 abcdefghijklmnopqrstuvwxyz
 defghijklmnopqrstuvwxyzabc
 ```
-**TO-Do: move modulo discussion to before the list, i.e. here**
 
 In order to write a function `shift` that shifts a letter
 by a given number, we need to:
+
 1. Convert the letter to an integer number using `to-int` function.
 2. Add n to it.
-3. Take the result modulo 26 (that would allow us to wrap around). For instance, if the letter is `x` (position 23 in the alphabet, where `a` is 0), and the shift is 3, the result would be 23 + 3 = 26. The largest letter is `z`, at the position 25, so 26 should result in 0. by taking the result modulo 26 we accomplish this task. 
+3. Take the result modulo 26 (that would allow us to wrap around). For instance, if the letter is `x` (position 23 in the alphabet, where `a` is 0), and the shift is 3, the result would be 23 + 3 = 26. The largest letter is `z`, at the position 25, so 26 should result in 0. Taking the result modulo 26 accomplishes this task. 
 4. After computing the position, we need to convert it back to a character by applying the `to-char` function that you wrote earlier. 
 
 The function that performs modulo arithmetic is `mod`. Here are a few examples of how it works:
@@ -31,9 +35,7 @@ The function that performs modulo arithmetic is `mod`. Here are a few examples o
 (shift \b 20) ; result \v
 (shift \z 3) ; result \c
 ```
-Note: if you shift by a negative number, you are performing a reverse operation. For instance, `(shift \d -3)` gives you `\a`. Thus decryption is just using the same function, but with the opposite (negative) key. 
-
-Now we are done with the nitty-gritty details for our ciphers, and are ready to do some encryption and decryption. 
+Note: if you shift by a negative number, you are performing a reverse operation. For instance, `(shift \d -3)` gives you `\a`. Thus decryption is just using the same function, but with the opposite (negative) key.  
 
 ## Working with words: sequences, `map`
 Now you can "encrypt" a letter, but you probably want to encrypt words. If you were writing a program in python or Java, you probably would be thinking of writing a loop. However, in Clojure we use *higher-order functions* that traverse sequences for us, and we just need to specify what operation we would like to perform on each element. 
@@ -93,20 +95,63 @@ Here a sequence of characters is given as a vector.
 **Explanations of `apply` (you can skip this):**
 TO-DO: add a link to Clojure docs. 
 
+Now we are done with the nitty-gritty details for our ciphers, and are ready to do some encryption and decryption.
+
 ### Encrypting with Caesar cipher
 
 Now we can encrypt words with Caesar cipher. Let's say we want to encrypt the word "apple" by shifting the alphabet by 20. We need to do the following steps:
+
 1. make the word into a sequence by using `seq` function
 2. use `map` to shift each letter in the sequence by 20 positions; we can write the actual shifting as an anonymous function that uses the function `shift` that we wrote earlier.
 3. use `apply str` to convert the result from a sequence to a string. 
 
-Feel free to write this out on a paper (or in Nightcode) before you look at the next example. 
+Feel free to write this out on paper or in Nightcode before you look at the solution below. 
 
-**To-do: first write a step-by-step one with defs. 
+```clojure 
+(def s (seq "apple")) ; s is the sequence (\a \p \p \l \e)
+(def encr-seq (map #(shift % 20) s)) ; encrypt the sequence
+(def result (apply str encr-seq)) ; convert to a string
+```
+The result, `"ujjfy"`, is what the encryption of "apple" with the key `20`. 
+
+Instead of saving intermediate results in variables, you can
+also write all the steps in one line of code:
 ```clojure 
 (apply str (map #(shift % 20) (seq "apple")))
 ```
+The latter style is more common in Clojure.
 
-**To-do: mention posting encryptions on slack**
+Of course, we want to encrypt different words, not just "apple", and use keys other than `20`. Thus, we want to write 
+a function that takes a word and a number `k`, and shifts the word by `k`. Here `k` serves as a key for the cipher. 
 
-## Working with strings
+**Exercise** Below is the start of a function that encrypts 
+a word `w` with a key `k`. Fill in the body of the function and test it on some examples. 
+```clojure 
+(defn caesar-encrypt
+  "encrypting a word w with a key k using Caesar cipher"
+  [w k]
+                                     ) 
+```
+Don't forget to 
+write all functions in the right upper panel of Nightcode, save and reload file, and test the function in the REPL. 
+
+Make sure that `(caesar-encrypt "apple" 20)` 
+returns the same result as the expression that you wrote 
+earlier, and that passing different words (all lower-case letters, no spaces) and different keys gives you different encryptions. 
+
+## Decrypting with Caesar cipher
+Encryption is good only if we can later decrypt the text. 
+
+**Exercise** Based on the function `caesar-encrypt`, write a
+function `caesar-decrypt` that takes an encrypted word (all lower-case, no spaces or other symbols) and a key and returns 
+its decryption. Recall how we can use the same `shift` function for decryption. 
+
+Test that `(caesar-decrypt "ujjfy" 20)` returns `"apple"`.
+Then try your decryption on the following:
+
+- `(caesar-decrypt "gtxyts" 5)`
+- `(caesar-decrypt "mvytebolbsnqo" 10)` 
+
+**Exercise** Decrypt your own examples and post them on slack (with the key), then try other participants' examples posted there. 
+
+## Working with strings that have other symbols
