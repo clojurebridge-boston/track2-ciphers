@@ -19,3 +19,5 @@ To-do: mention comments
 To-do: how to run it
 
 To-do: definitions in upper right panel, test functions in REPL. 
+
+**Next:** [Clojure data types and functions](track2-functions.md)

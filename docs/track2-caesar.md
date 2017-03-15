@@ -177,3 +177,4 @@ Feel free to play with other Java methods for strings:
 
 Now we are going to use another Clojure higher-level function, `filter`, to remove all the non-letter character from a string. 
 
+**Previous:** [Clojure data types and functions](track2-functions.md)
