@@ -30,7 +30,7 @@ This will return `105`.
 
 **Exercise:** Write a function `g` that takes two numbers `x` and `y` and returns `x` times `10` plus `y`. 
 
-**Exercise:** Look up how `if` works in Clojure **TO-DO: add a link** and returns the absolute value of `x - y`.
+**Exercise:** Look up how [`if`](https://clojuredocs.org/clojure.core/if) works in Clojure and returns the absolute value of `x - y`.
 
 ## Converting between `int` and `char`
 
@@ -44,8 +44,8 @@ The conversion that we would like to accomplish is to represent the 26 letters o
 
 Characters in Clojure are written with a backslash in the front. For instance, a character`x` is written as `\x`. 
 
-Since characters are encoded by their ASCII values **TO-Do link** 
-Converting a character to an `int` gives its ASCII value.
+Since characters are encoded by their [ASCII values](https://en.wikipedia.org/wiki/ASCII#Code_chart),
+converting a character to an `int` gives its ASCII value.
 For instance, `(int \c)`is 99. 
 ASCII codes for lowercase letters are in order: `(int \a)` is 97, `(int \b)` is 98, etc. 
 Because of that, to convert a letter to an integer between 0 and 25 according to its position in the alphabet, we just need to subtract the ASCII value of `\a` from it:
