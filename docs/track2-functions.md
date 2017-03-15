@@ -4,7 +4,7 @@
 
 Clojure is a functional language on top of the Java programming language. Thus Clojure data types are Java data types under the hood. This provides the convenience of using Java methods to work with Java types, but also requires type conversions to maintain consistency with Java types.
 
-Ciphers that we will be exploring in this lesson work with letters that are represented as a character `char` type. However, they are treated as integer numbers `int` to make mathematics of encryption work. Letters form strings, which are a datatype different from characters. 
+Ciphers that we will be exploring in this lesson work with letters that are represented as a character `char` type. However, they are treated as integer numbers `int` to make mathematics of encryption work. Letters form strings, which are a data type different from characters. 
 
 ## Defining Clojure constants and functions
 
@@ -57,11 +57,11 @@ Because of that, to convert a letter to an integer between 0 and 25 according to
   [c]
   (- (int c) ascii-a))
 ``` 
-Take a look at the function and make sure you understand what how it works. Try it on a few lowercase letters. 
-Also note that we added a description of the function, a so-called doc-string. It is position after the function name and before the parameters.
+Take a look at the function and make sure you understand how it works. Try it on a few lowercase letters. 
+Also note that we added a description of the function, a so-called doc-string. It is located after the function name and before the parameters.
 You can look up the doc-string of a function using `(doc function-name)`. For instance, `(doc to-int)` prints out the doc-string for the `to-int` function.
 
-**Exercise:** write a reverse conversion function `to-char`, i.e. a function that takes a number between 0 and 25 (inclusive) and returns the corresponding lowercase letter. For instance, `(to-char 3)` should return `\d`.  
+**Exercise:** Write a reverse conversion function `to-char`, i.e. a function that takes a number between 0 and 25 (inclusive) and returns the corresponding lowercase letter. For instance, `(to-char 3)` should return `\d`.  
 
 **Previous:** [Overview of Clojure](track2-functional-overview.md)  
 **Next:** [Caesar cipher; Clojure higher order functions](track2-caesar.md)
