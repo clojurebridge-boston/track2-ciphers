@@ -1,4 +1,4 @@
-#Caesar cipher
+# Caesar cipher
 
 ## Letter shift 
 *Relevant functions on clojuredocs:* [+](), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
@@ -171,10 +171,23 @@ Feel free to play with other Java methods for strings:
 [Java 8 String methods](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html).  
 
 ### Removing non-letter symbols
-*Relevant functions on clojuredocs:* [filter](https://clojuredocs.org/clojure.core/filter)
+*Relevant functions on clojuredocs:* [filter](https://clojuredocs.org/clojure.core/filter), [odd?](https://clojuredocs.org/clojure.core/odd_q)
 <br />
 *Relevant Java functions:* [isLowerCase](https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html#isLowerCase-char-)
 
 Now we are going to use another Clojure higher-level function, `filter`, to remove all the non-letter character from a string. 
+
+Just like `map`, `filter` works on sequences. It takes a function that returns a true/false value and a sequence, and returns a new sequence with only those elements of the given one for which the function returned a true value. 
+
+For example, we can use a function `odd?` that works as follows: `odd? 5` returns `true`, `odd? 4` returns `false`. 
+If we want to keep only odd integers from a given sequence, 
+we can use `filter` with `odd?`:
+```clojure
+filter odd? [6 7 -1 0 5]) ; results in (7 -1 5)
+```
+Just like `map`, `filter` can also take an anonymous function:
+```clojure
+
+```
 
 **Previous:** [Clojure data types and functions](track2-functions.md)
