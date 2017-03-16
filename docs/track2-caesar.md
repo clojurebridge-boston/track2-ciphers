@@ -156,7 +156,7 @@ Then try your decryption on the following:
 
 ## Working with strings that have other symbols
 
-Encryption is not particularly helpful if it preserves capitalization, punctuation, spaces between the words, and similar things since they reveal a lot about the text. Thus, in order to encrypt text we will remove all the symbols other than letters and will convert all letters to lowercase. 
+Encryption is not particularly helpful if it preserves capitalization, punctuation, spaces between the words, and similar things that reveal a lot about the text. Thus, in order to encrypt text we will remove all the symbols other than letters and will convert all letters to lowercase. 
 
 ### Converting to lowercase: calling a Java function.
 *Relevant Java functions:* [Java toLowerCase string method](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#toLowerCase--) (note that Java functions are commonly refer to as methods). 
@@ -171,23 +171,26 @@ Feel free to play with other Java methods for strings:
 [Java 8 String methods](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html).  
 
 ### Removing non-letter symbols
-*Relevant functions on clojuredocs:* [filter](https://clojuredocs.org/clojure.core/filter), [odd?](https://clojuredocs.org/clojure.core/odd_q)
+*Relevant functions on clojuredocs:* [filter](https://clojuredocs.org/clojure.core/filter), [filterv](https://clojuredocs.org/clojure.core/filterv), [odd?](https://clojuredocs.org/clojure.core/odd_q)
 <br />
 *Relevant Java functions:* [isLowerCase](https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html#isLowerCase-char-)
 
-Now we are going to use another Clojure higher-level function, `filter`, to remove all the non-letter character from a string. 
-
-Just like `map`, `filter` works on sequences. It takes a function that returns a true/false value and a sequence, and returns a new sequence with only those elements of the given one for which the function returned a true value. 
+Now we are going to use another Clojure higher-level function, `filterv`, to remove all the non-letter character from a string.  It takes a function that returns a true/false value and a vector, and returns a new vector with only those elements of the given one for which the function returned a true value. 
 
 For example, we can use a function `odd?` that works as follows: `odd? 5` returns `true`, `odd? 4` returns `false`. 
 If we want to keep only odd integers from a given sequence, 
-we can use `filter` with `odd?`:
+we can use `filterv` with `odd?`:
 ```clojure
-filter odd? [6 7 -1 0 5]) ; results in (7 -1 5)
+filterv odd? [6 7 -1 0 5]) ; results in [7 -1 5]
 ```
-Just like `map`, `filter` can also take an anonymous function:
+
+Note that `filterv` is a vector analog of a more common (but less convenient in our case) function `filter`, just like `mapv` is a vector analog of `map`.
+
+Just like `mapv`, `filterv` can also take an anonymous function:
 ```clojure
 
 ```
 
 **Previous:** [Clojure data types and functions](track2-functions.md)
+<br />
+**Next:**
