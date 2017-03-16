@@ -35,23 +35,33 @@ The function that performs modulo arithmetic is `mod`. Here are a few examples o
 ```
 Note: if you shift by a negative number, you are performing a reverse operation. For instance, `(shift \d -3)` gives you `\a`. Thus decryption is just using the same function, but with the opposite (negative) key.  
 
-## Working with words: sequences, `map`
+## Working with words: sequences, `map`, `mapv`
+*Relevant functions on clojuredocs:* [map](https://clojuredocs.org/clojure.core/map), [mapv](https://clojuredocs.org/clojure.core/mapv)
+
 Now you can "encrypt" a letter, but you probably want to encrypt words. If you were writing a program in python or Java, you probably would be thinking of writing a loop. However, in Clojure we use *higher-order functions* that traverse sequences for us, and we just need to specify what operation we would like to perform on each element. 
 
-`map` is one of such higher-order functions. It takes in a sequence of elements and a function, and returns a sequence that results from applying the given function to each element. 
+`map` and `mapv` are such higher-order functions. They take in a sequence of elements and a function, and return a sequence that results from applying the given function to each element.  
 
-This sounds very abstract, so let's look at an example. We use a function `inc` (increment) that takes an integer and returns the next integer, i.e. `(inc 1)` returns 2. now we are going to increment each element of a sequence of numbers
-using `map`:
+This sounds very abstract, so let's look at an example with `mapv`. We use a function `inc` (increment) that takes an integer and returns the next integer, i.e. `(inc 1)` returns 2. now we are going to increment each element of a sequence of numbers
+using `mapv`:
 ```clojure
-(map inc [1 3 2]) ; returns (2 4 3)
+(mapv inc [1 3 2]) ; returns [2 4 3]
 ```
-Here `[1 3 2]` is a *vector* of numbers. This is the easiest way of giving Clojure a collection of elements in a specific order. What you get back is also an ordered collection of elements, each of them is incremented by 1. The reason it appears in parentheses is because it's a slightly different type of a collection. We will not worry about these details now, just remember that when you are giving Clojure a collection of items, the easiest way to write it is a vector.
+Here `[1 3 2]` and `[2 4 3]` are *vectors* of numbers. This is the easiest way of giving Clojure a collection of elements in a specific order. What you get back is a vector in which each element of the given vector is incremented by 1. 
+
+The difference between `map` and `mapv` is that they return the result in a slightly different way: `map` returns a sequence in its most general form, and `mapv` returns its result as a particular sequential collection known as a *vector*. Vectors are slightly easier to work with for our examples, so we are using `mapv`. 
 
 **Exercise:** What do you expect when you type in Clojure REPL?
 ```clojure
-(map to-int [\a \b \c])
+(mapv to-int [\a \b \c])
 ``` 
 Try it, see if the result is what you were expecting. If it's not, make sure to understand what it is and why. 
+
+Note that you can also apply `mapv` to a string:
+```clojure
+(mapv to-int "abc")
+``` 
+The result is a vector of numbers. 
 
 **Exercise:** Copy the following definition of the function 
 `square` into the definitions panel of Nightcode (right upper panel): 
@@ -61,29 +71,23 @@ Try it, see if the result is what you were expecting. If it's not, make sure to 
   [x]
   (* x x))
 ```
-Reload the file. Now in the REPL panel **type in** an expression, **using `map`**, that computes the squares of numbers `[1 3 -2]`.
+Reload the file. Now in the REPL panel **type in** an expression, **using `mapv`**, that computes the squares of numbers `[1 3 -2]`.
 
 ### Using anonymous functions
 Maps are often used together with anonymous functions. These
 are one-time-use functions that are put together "on the fly" and not given a name. they also don't given names to their parameters, referring to them as `%1, %2, %3` - or just `%` if there is only one. 
 
-They are often used with higher-order functions, such as `map`. Here is an example:
+They are often used with higher-order functions, such as `mapv`. Here is an example:
 ```clojure
-(map #(* % %) [1 3 -2])
+(mapv #(* % %) [1 3 -2])
 ``` 
-This returns `(map #(* % %) [1 3 -2])` (the sequence of squares of all given numbers, just like in the exercise above). 
+This returns `[1 9 4]` (the vector of squares of all given numbers, just like in the exercise above). 
 The anonymous function passed to the `map` is `#(* % %)`. It is equivalent to the `square` function above. The `%` sign here refers to the parameter of the function, it is used instead of `x`. The `#` in front of the expression indicates that this is a function. 
       
-**Exercise:** Use `map` and an anonymous function to take the opposite of each number in a given vector. For instance, if the vector is `[2 -1 0 3]`, the result would be `[-2 1 0 -3]`.
+**Exercise:** Use `mapv` and an anonymous function to take the opposite of each number in a given vector. For instance, if the vector is `[2 -1 0 3]`, the result would be `[-2 1 0 -3]`.
 
-### Converting between strings and sequences 
-`map` is very convenient for working with sequences. Strings, however, are not a sequence of characters, so some conversion is needed. 
-
-In order to convert from a string to a sequence of characters, you can use a `seq` function: 
-```clojure
-(seq "word") ; results in a sequence (\w \o \r \d)
-```
-
+### Converting between from vectors to strings
+**TO-Do: fix the writeup below** 
 The reverse conversion is a bit less obvious:
 ```clojure
 (apply str [\w \o \r \d]) ; results in a string "word"
@@ -99,23 +103,21 @@ Now we are done with the nitty-gritty details for our ciphers, and are ready to 
 
 Now we can encrypt words with Caesar cipher. Let's say we want to encrypt the word "apple" by shifting the alphabet by 20. We need to do the following steps:
 
-1. make the word into a sequence by using `seq` function
-2. use `map` to shift each letter in the sequence by 20 positions; we can write the actual shifting as an anonymous function that uses the function `shift` that we wrote earlier.
-3. use `apply str` to convert the result from a sequence to a string. 
+1. use `mapv` to shift each letter in the sequence by 20 positions; we can write the actual shifting as an anonymous function that uses the function `shift` that we wrote earlier.
+2. use `apply str` to convert the result from a sequence to a string. 
 
 Feel free to write this out on paper or in Nightcode before you look at the solution below. 
 
 ```clojure 
-(def s (seq "apple")) ; s is the sequence (\a \p \p \l \e)
-(def encr-seq (map #(shift % 20) s)) ; encrypt the sequence
-(def result (apply str encr-seq)) ; convert to a string
+(def s (mapv #(shift % 20) s)) ; encrypt the sequence
+(def result (apply str s)) ; convert to a string
 ```
 The result, `"ujjfy"`, is what the encryption of "apple" with the key `20`. 
 
 Instead of saving intermediate results in variables, you can
 also write all the steps in one line of code:
 ```clojure 
-(apply str (map #(shift % 20) (seq "apple")))
+(apply str (mapv #(shift % 20) "apple"))
 ```
 The latter style is more common in Clojure.
 

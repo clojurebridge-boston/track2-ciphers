@@ -61,6 +61,10 @@ entire line.
 
 For more on Clojure style please see [The Clojure Style Guide](https://github.com/bbatsov/clojure-style-guide) (and you might want to revisit this link after you are done with this lesson). 
 
+## Clojuredocs 
+
+To-do: what clojuredocs are and a bit on how to read them 
+
 ## Creating a project with Nightcode
 
 To-do: how to run it
