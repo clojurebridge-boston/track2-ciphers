@@ -225,11 +225,12 @@ Decryption doesn't require filtering out other symbols and converting to lowerca
 
 Try decrypting the following: 
 
+**TO-DO**: add
 
-## Now what? 
+## What's next?  
 Encryption and decryption is easy to do if you know the key (the amount of alphabet shift). But what do you do if you don't know it? The next section shows you how you can break Caesar cipher without a key using Clojure hashmaps.  
 
-**Next:** [Breaking Caesar cipher: hashmaps](track2-breaking-caesar-cipher.md)
+**Next:** [Breaking Caesar cipher: hashmaps](track2-frequency.md)
 <br />
 **Previous:** [Clojure data types and functions](track2-functions.md)
 
