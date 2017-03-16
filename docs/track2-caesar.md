@@ -1,9 +1,7 @@
 # Caesar cipher
 
 ## Letter shift 
-*Relevant functions on clojuredocs:* [+](), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
-
-**to-do** a link to https://clojuredocs.org/clojure.core/+ is having an issue: + is interpreted as redirect. 
+*Relevant functions on clojuredocs:* [+](https://clojuredocs.org/clojure.core/%2B), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
 
 Caesar cipher works by shifting the alphabet by a given number of positions to the right, wrapping around at the end. 
 The key for the cipher is how many positions the letters are shifted by. 
