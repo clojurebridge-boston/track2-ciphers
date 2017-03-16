@@ -152,7 +152,7 @@ Then try your decryption on the following:
 - `(caesar-decrypt "gtxyts" 5)`
 - `(caesar-decrypt "mvytebolbsnqo" 10)` 
 
-**Exercise** Decrypt your own examples and post them on slack (with the key), then try other participants' examples posted there. 
+**Exercise** Encrypt your own examples and post them on slack (with the key), then try to decrypt other participants' examples posted there. Before you post your own, make sure they decrypt correctly. 
 
 ## Working with strings that have other symbols
 
@@ -173,7 +173,7 @@ Feel free to play with other Java methods for strings:
 ### Removing non-letter symbols
 *Relevant functions on clojuredocs:* [filter](https://clojuredocs.org/clojure.core/filter), [filterv](https://clojuredocs.org/clojure.core/filterv), [odd?](https://clojuredocs.org/clojure.core/odd_q)
 <br />
-*Relevant Java functions:* [isLowerCase](https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html#isLowerCase-char-)
+*Relevant Java functions:* [isLetter](https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html#isLetter-char-)
 
 Now we are going to use another Clojure higher-level function, `filterv`, to remove all the non-letter character from a string.  It takes a function that returns a true/false value and a vector, and returns a new vector with only those elements of the given one for which the function returned a true value. 
 
@@ -188,9 +188,48 @@ Note that `filterv` is a vector analog of a more common (but less convenient in 
 
 Just like `mapv`, `filterv` can also take an anonymous function:
 ```clojure
+(filterv #(< % 5) [3 6 5 8 0]) ; results in [3 0]
+```
+The anonymous function `#(< % 5)` returns true if its argument is strictly less than `5` and false otherwise. 
 
+We will be using a Java method of the Character class `isLetter` to check if a character is a letter. There is a slight difference in how this method is defined in Java: it's method not attached to any object, just to the Character class (it's a so-called static method), and so the syntax for calling it is a bit different:
+```clojure
+(Character/isLetter \a) ; true
+(Character/isLetter \?) ; false
 ```
 
-**Previous:** [Clojure data types and functions](track2-functions.md)
+**Exercise:** write a function `get-letters` that takes a string with any symbols in it, and returns a string of of 
+only letters in it, all letters converted to lowercase, as in the example below: 
+```clojure
+(get-letters "Hello, friend!") ; "hellofriend"
+``` 
+The sequences of steps that the function needs to perform is:
+
+1. Convert the string to lowercase letters using `toLowerCase` (note: this function works on a string)
+2. filter out non-letter characters using `filterv`
+3. Convert the result back to a string using `apply str`. 
+
+You might want to first try out the steps in REPL, and then put it all together in a function.  
+
+## Encrypting and decrypting text with Caesar cipher
+Now you are ready to do encryption and decryption with Caesar cipher on entire strings of text. The result would be all lowercase with no punctuation marks, but still readable.
+
+The sequence of steps for encryption would require you to:
+
+1. Use `get-letters` to get a string only letters (in lower case) from the text that you are trying to encrypt. 
+2. Encrypt this string using your `caesar-encrypt` function.
+
+As a test example, `"Hello, friend!"` with the key 5 encrypts to `"mjqqtkwnjsi"`. 
+
+Decryption doesn't require filtering out other symbols and converting to lowercase since encrypted strings are already of the right format, so you can use your `caesar-decrypt` function. 
+
+Try decrypting the following: 
+
+
+## Now what? 
+Encryption and decryption is easy to do if you know the key (the amount of alphabet shift). But what do you do if you don't know it? The next section shows you how you can break Caesar cipher without a key using Clojure hashmaps.  
+
+**Next:** [Breaking Caesar cipher: hashmaps](track2-breaking-caesar-cipher.md)
 <br />
-**Next:**
+**Previous:** [Clojure data types and functions](track2-functions.md)
+
