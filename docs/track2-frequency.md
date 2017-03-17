@@ -152,11 +152,28 @@ We need to map over the alphabet, computing the counts for each letter. Thus we 
 **Exercise:** Make your solution of the previous exercise into a function that takes a string and returns . Pass `enrc1` to it to make sure that it returns the right result. 
 
 ## Clojure sorting
-*Relevant functions:* [sort-by](https://clojuredocs.org/clojure.core/sort-by), [last](https://clojuredocs.org/clojure.core/last), [reverse](https://clojuredocs.org/clojure.core/reverse)
+*Relevant functions:* [sort-by](https://clojuredocs.org/clojure.core/sort-by)
+
+Now that we got the hashmap of counts, we need to find the most frequently occurring letters. We should expect that among them there are the three most commonly occurring English letters: `e, t, a`. This narrows the choices of the key enough to  start checking them until we find a key that a produces recognizable English text. 
+
+We can just look at the hashmap and find the most frequent letters, but it's more convenient to sort it by the counts. The function that accomplishes this is `sort-by`: it is given 
+any sequence and a function that tells how elements should be sorted. For instance, given a sequence of pairs of numbers, we can sort by the first element of the pair:
+```clojure
+(sort-by first [[1 2] [2 2] [2 3]]) ; results in ([1 2] [2 2] [2 3])  
+```
+Even better, we can specify if we want this order increasing or decreasing: 
+```clojure
+(sort-by first > [[1 2] [2 2] [2 3]]) ; results in ([2 2] [2 3] [1 2])
+```
+
+A hashmap is a collection of key/value pairs, and therefore behaves the same as a vector of vectors. The only difference is that we cannot have two of the same keys in a hashmap, so we have changed the above example slightly:  
+```clojure
+(sort-by first > {1 2, 4 2, 2 3}) ; results in ([4 2] [2 3] [1 2])
+```
+We need to sort our hashmap by the second element of each vector (the value, not the key). 
 
 **To-do** explain that the sequence of a hashmap consists of pairs. 
 
-**To-do** sort the map on counts, `last`, `drop`
 
 Alternatively, you can reverse the resulting list after you have sorted it, reverse it using the function `reverse`, and take the first item or the first few items to find likely key values. 
 
