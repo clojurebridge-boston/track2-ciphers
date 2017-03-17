@@ -170,16 +170,27 @@ A hashmap is a collection of key/value pairs, and therefore behaves the same as 
 ```clojure
 (sort-by first > {1 2, 4 2, 2 3}) ; results in ([4 2] [2 3] [1 2])
 ```
-We need to sort our hashmap by the second element of each vector (the value, not the key). 
+We need to sort our hashmap by the second element of each vector (the number of occurrences of a letter is the value, not the key). Note that we need to sort in decreasing order, as in the above example. 
 
-**To-do** explain that the sequence of a hashmap consists of pairs. 
+**Exercise:** write an expression that sorts the hashmap. 
+The result should be: 
+```clojure
+([\p 19] [\t 17] [\x 17] [\c 16] [\g 16] [\i 13] [\v 11] [\d 10] [\b 8] [\e 8] [\j 8] [\r 8] [\a 7] [\s 6] [\h 5] [\u 5] [\w 4] [\q 3] [\k 2] [\n 2] [\l 1] [\o 1] [\y 1] [\f 0] [\m 0] [\z 0])
+```
 
+We can also take the first three elements of this map using `take`. 
 
-Alternatively, you can reverse the resulting list after you have sorted it, reverse it using the function `reverse`, and take the first item or the first few items to find likely key values. 
+**Exercise** Write a function that, given a hashmap of characters and their counts, returns the highest occurring elements and their counts: `([\p 19] [\t 17] [\x 17])`.
 
 ## Computing the cipher key
 
-**To-do:** explain, but not show, the formula for the key. 
+The only remaining task now is to guess the values of the keys and try them. The most common three English letters are `e,t,a`, and there is a very high probability that one of them corresponds to `\p` in the encryption. 
+
+Let's suppose `\p` is an encryption for `\e` (this may or may not be true). We have obtained `\p` from `\e` by converting both of them to their integer value, adding the key, and taking the result modulo 26. Thus, in order to find the key we need to subtract the integer value of `\e` from the integer value of `\p` and take the result modulo 26. 
+
+**Exercise:** Write the above computation as a formula (or, better yet, a function that takes two characters returns a potential key). 
+
+**Exercise:** Try decrypting the text with the key that you computed. If it doesn't work, try other likely options (`\p` can also stand for `\t` or `\a`). One of these should give you the correct key. 
 
 **Exercise:** Now try this approach on the string "ahixblmaxmabgzpbmayxtmaxklmatmixkvaxlbgmaxlhnetgwlbgzlmaxmngxpbmahnmmaxphkwltgwgxoxklmhiltmtee".
 
