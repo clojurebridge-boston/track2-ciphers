@@ -87,9 +87,23 @@ Here we need to use `filterv` with an anonymous function that checks if its para
 (mapv to-char (range 26))
 ```  
 
-## Clojure sorting
+**To-do:** Use zipmap to create a map of letter/count pairs. 
 
-**To-do** sort the map on frequencies, `last`, `drop`
+## Clojure sorting
+*Relevant functions:* [sort-by](https://clojuredocs.org/clojure.core/sort-by), [last](https://clojuredocs.org/clojure.core/last), [reverse](https://clojuredocs.org/clojure.core/reverse)
+
+**To-do** sort the map on counts, `last`, `drop`
+
+Alternatively, you can reverse the resulting list after you have sorted it, reverse it using the function `reverse`, and take the first item or the first few items to find likely key values. 
 
 ## Computing the cipher key
 
+**To-do:** explain, but not show, the formula for the key. 
+
+**Exercise:** Now try this approach on the string "ahixblmaxmabgzpbmayxtmaxklmatmixkvaxlbgmaxlhnetgwlbgzlmaxmngxpbmahnmmaxphkwltgwgxoxklmhiltmtee".
+
+**Exercise:** Also, try uploading your own longer examples of encryption (but not the key) to slack and try figuring out the keys for other examples uploaded there. Make sure they are long enough for frequency analysis. Use only English texts. 
+
+**Next:** [Vigenere cipher](track2-vigenere.md)
+<br />
+**Previous:** [Caesar cipher](track2-caesar.md)
