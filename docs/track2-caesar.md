@@ -1,7 +1,7 @@
 # Caesar cipher
 
 ## Letter shift 
-*Relevant functions on clojuredocs:* [+](https://clojuredocs.org/clojure.core/%2B), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
+*Relevant functions:* [+](https://clojuredocs.org/clojure.core/%2B), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
 
 Caesar cipher works by shifting the alphabet by a given number of positions to the right, wrapping around at the end. 
 The key for the cipher is how many positions the letters are shifted by. 
@@ -36,7 +36,7 @@ The function that performs modulo arithmetic is `mod`. Here are a few examples o
 Note: if you shift by a negative number, you are performing a reverse operation. For instance, `(shift \d -3)` gives you `\a`. Thus decryption is just using the same function, but with the opposite (negative) key.  
 
 ## Working with words: sequences, `map`, `mapv`
-*Relevant functions on clojuredocs:* [map](https://clojuredocs.org/clojure.core/map), [mapv](https://clojuredocs.org/clojure.core/mapv)
+*Relevant functions:* [map](https://clojuredocs.org/clojure.core/map), [mapv](https://clojuredocs.org/clojure.core/mapv)
 
 Now you can "encrypt" a letter, but you probably want to encrypt words. If you were writing a program in python or Java, you probably would be thinking of writing a loop. However, in Clojure we use *higher-order functions* that traverse sequences for us, and we just need to specify what operation we would like to perform on each element. 
 
@@ -86,13 +86,11 @@ The anonymous function passed to the `map` is `#(* % %)`. It is equivalent to th
       
 **Exercise:** Use `mapv` and an anonymous function to take the opposite of each number in a given vector. For instance, if the vector is `[2 -1 0 3]`, the result would be `[-2 1 0 -3]`.
 
-### Converting between from vectors to strings
-**TO-Do: fix the writeup below** 
-The reverse conversion is a bit less obvious:
+### Converting from vectors to strings
+`mapv` returns its result as a vector, but it would be really useful to get it as a string. The conversion is non-obvious, and you can skip the explanations of how it works. Here is the code for it: 
 ```clojure
 (apply str [\w \o \r \d]) ; results in a string "word"
 ```
-Here a sequence of characters is given as a vector. 
 
 **Explanations of `apply` (you can skip this):**
 TO-DO: add a link to Clojure docs. 
