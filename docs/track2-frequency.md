@@ -194,7 +194,11 @@ Let's suppose `\p` is an encryption for `\e` (this may or may not be true). We h
 
 **Exercise:** Now try this approach on the string "ahixblmaxmabgzpbmayxtmaxklmatmixkvaxlbgmaxlhnetgwlbgzlmaxmngxpbmahnmmaxphkwltgwgxoxklmhiltmtee".
 
-**Exercise:** Also, try uploading your own longer examples of encryption (but not the key) to slack and try figuring out the keys for other examples uploaded there. Make sure they are long enough for frequency analysis. Use only English texts. 
+**Exercise:** Also, try uploading your own longer examples of encryption (but not the key) to slack and try figuring out the keys for other examples uploaded there. Make sure they are long enough for frequency analysis. Use only English texts.
+
+## What's next? 
+
+Obviously, Caesar cipher isn't at all secure. However, there is a more complicated, better cipher that extends the idea of an alphabet shift: it's Vigenere cipher explained in the next section. 
 
 **Next:** [Vigenere cipher](track2-vigenere.md)
 <br />
