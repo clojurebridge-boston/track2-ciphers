@@ -10,4 +10,8 @@ Section 4: [Hashmaps; Breaking Caesar cipher](docs/track2-frequency.md)
 
 Section 5: [Vigenere cipher](docs/track2-vigenere.md)
 
+### Copyright and License
 
+Copyright © 2017 Elena Machkasova, 2017 ClojureBridge Boston 
+
+Licensed under the [MIT](http://opensource.org/licenses/MIT) [LICENSE](LICENSE)
