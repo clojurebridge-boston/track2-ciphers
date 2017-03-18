@@ -48,7 +48,7 @@ Here is a cool feature: if one the given sequences is longer than the other, the
 ```clojure
 (mapv + [6 7 8] (range)) ; [6 8 10]
 ```
-This allows us to use 
+This allows us to use a `cycle` function to generate ab infinite sequence of repeated keyword and then "add" it to text to be encrypted. 
 
 ## Breaking Vigenere cipher
 
