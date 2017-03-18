@@ -112,6 +112,7 @@ We encourage you to:
 
 1. Use this lesson as the guide to your learning, not as a rigid set of steps. Take as much time as you want to explore the material, you don't have to finish it or reach any particular milestone. 
 2. Try things out. Clojure REPL is a good way to play around with examples. 
-3. Ask questions. Mentors are here to answer your questions or explain results that seem confusing or discuss different . 
+3. Ask questions. Mentors are here to answer your questions or explain results that seem confusing or discuss different approaches to a problem. 
+4. You might want to work in pairs, especially on the later parts of the lesson. 
  
 **Next:** [Clojure data types and functions](track2-functions.md)

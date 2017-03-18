@@ -62,12 +62,20 @@ crypto-solutions=> (take 10 cycle2) ; (\w \o \r \d \w \o \r \d \w \o)
 
 **Exercise:** Now write a function that takes an encrypted string and a keyword and performs the decryption. Note that you will be doing subtraction modulo 26 instead of the addition. 
 <br />
-Make sure that when you encrypt a string with a keyword, you can get it back by decrypting it with the same keyword (except the removal of spaces). 
+Make sure that when you encrypt a string with a keyword, you can get it back (except in all lowercase letters and without punctuation) by decrypting it with the same keyword. 
+
+**Exercise:** Post an encryption (with a key) on slack. Try decrypting other people's encryptions.  
 
 ## Breaking Vigenere cipher
-It seems like a Vigenere cipher doesn't allow frequency analysis since the same letter may be encrypted in multiple different ways. However, one can actually guess a key by a process that's just slightly more complicated than breaking a Caesar cipher. It also required a longer text. 
+It seems like a Vigenere cipher doesn't allow frequency analysis since the same letter may be encrypted in multiple different ways. However, one can actually guess a key by a process that's just slightly more complicated than breaking a Caesar cipher. It also requires a longer text. 
 
-Suppose you know 
+Suppose you know the length of the key. Let's say, the key is 5 letters long. That means that if I take letters in the encrypted text at positions 0, 5, 10, 15, etc., they are all encrypted with the same letter of the key, so they are all shifted by the same amount. The same is true for letters at the positions 1, 6, 11, 16, etc. 
+
+This means that you can do frequency analysis on each of these groups of letters, and determine a likely one-letter key  for each group exactly the same as you determined it for the Caesar cipher. Putting these one-letter keys together forms the keyword that you are trying to guess. 
+
+But how do you know the length of the key??? It turns out that if you take letters in the encrypted string at the distance that equals to the length of the keyword (as we have done above), their frequencies are very uneven, much like the frequencies of letters in the English alphabet. However, if you take any other distance, frequencies tend to be more uniformly distributed (closer to random noise). 
+
+Armed with these ideas, you can now try it on the example given at the end of this section. Below we explain how various Clojure functions can be used for this task. 
 
 ### Part 1: determine the length of the key
 
@@ -75,7 +83,7 @@ Suppose you know
 
 ### Part 2: frequency analysis on the subsequences
 
-Here is an example for you to try:
+Here is an example for you to try to break. The key is between two and 8 characters long. Be patient, this may take time. Try to automate you process as much as possible. We also recommend that you work in pairs. 
 ```
 rzsrppgeamjllagcpwxismxxcalecwygluetcaguepwwlznpclepcsgcpkgbac
 ltcifstvntybwsepwutzkinweettwgqwjpnweefbwgazgvciebtvyalvyjlowh
