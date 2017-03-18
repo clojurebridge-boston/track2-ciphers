@@ -75,15 +75,38 @@ Clojuredocs are very helpful, please use them!
 
 ## Creating a project with Nightcode
 
-To-do: how to run it
+Start Nightcode by double-clicking on the Jar file that youn downloaded. After it starts, go to the **Start** menu and select **Console Project**. Choose a location for it (that's where its files will be stored) and a name. **The name must not contain spaces.** By Clojure convention, you may give it a name with a dash, something like `track2-ciphers`. 
 
-To-do: definitions in upper right panel, test functions in REPL. 
+Once the project is created, click the arrow with its name, click `src` to open, and then click on the arrow by the folder in it with the same name as the project. You should see the file `core.clj`. Double-click on it to open. 
+
+Your screen should look something like this:
+![Nightcode picture](NC.png)
+
+The left panel is a navigation panel for opening and closing files. We will not be using it much, so you might want to make it narrower. 
+
+The right upper panel is where your variables and function definitions go. You may overwrite `-main`, you will not need it. However, you do need to keep the top two lines. 
+
+The lower right panel is the Clojure interpreter. It's running a REPL (Read-Evaluate-Print Loop). This means that you type in Clojure expressions, and it gives you the results. 
+
+Clicking **Run with REPL** will start a REPL for you. Clicking **Reload file** will load all of the definitions from the upper panel (the definitions panel) into REPL so that you can interactively test your functions. Type your Clojure expressions at the prompt (in the example above the prompt is `ciphers-project.core=>`). 
+
+Thus, your process of code development will be like this: 
+
+1. Experiment in REPL (lower right panel) so that you have an idea for what your function is going to be. You can use up arrow to bring the previous expression that you typed in. This is helpful if you want to change it only slightly. 
+2. Write the function in the definition panel (upper right panel).
+3. Save the file.
+4. Load it by clicking "Reload file". 
+5. If there are errors, go back into the definition panel, fix them, save, and reload. 
+6. When there are no errors, test the function in REPL by calling it on some test data. 
+7. If at some point there is an error and the REPL prompt doesn't come back, press "Enter" on the keyboard. If that doesn't help, you would need to reload the file (and in some cases even restart the REPL by clicking "Run with REPL").  
+
+You might want to keep these directions open as you start working on the project. 
 
 ## About this lesson
 
 This lesson is intended to be a self-contained introduction to Clojure using fun cipher examples. It walks you through most of the commonly used Clojure functions, gives you an opportunity to write your own through a series of suggested exercises, and finally gives you an example of an encryption to try to break (i.e. attempt to find the key and the decryption) using the tools you have learned. 
 
-Even though the examples are "toy" examples, and not a real-life encryption, the Clojure features and approaches that you learn would be helpful for any data analysis and data processing and 
+Even though the examples are "toy" examples, and not a real-life encryption, the Clojure features and approaches that you learn would be helpful for any data analysis and data processing. 
 
 We encourage you to:
 
