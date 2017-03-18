@@ -3,7 +3,7 @@
 ## Letter shift 
 *Relevant functions:* [+](https://clojuredocs.org/clojure.core/%2B), [-](https://clojuredocs.org/clojure.core/-), [mod](https://clojuredocs.org/clojure.core/mod)
 
-Caesar cipher works by shifting the alphabet by a given number of positions to the right, wrapping around at the end. 
+Caesar cipher works by shifting the alphabet by a given number of positions to the left, wrapping around at the end. 
 The key for the cipher is how many positions the letters are shifted by. 
 For instance, if the key is 3 then `a` is replaced by `d`, `b` by `e`, etc. Here is the shift of the entire alphabet:
 ```
@@ -93,7 +93,8 @@ The anonymous function passed to the `map` is `#(* % %)`. It is equivalent to th
 ```
 
 **Explanations of `apply` (you can skip this):**
-TO-DO: add a link to Clojure docs. 
+Here is the [clojuredocs description of `apply`](https://clojuredocs.org/clojure.core/apply) The function takes a vector and passes individual elements of it to a function, as if they were written separately, and not in a vector. For instance, `(+ [1 2 3])` is an error since `[1 2 3]` is a vector, and `+` doesn't work on vectors. What we want is `(+ 1 2 3)`, that's a valid summation and results in `6`. Using 
+`(apply + [1 2 3])` works exactly like this: it passes the three arguments to `+` individually, and not as a vector. 
 
 Now we are done with the nitty-gritty details for our ciphers, and are ready to do some encryption and decryption.
 

@@ -79,11 +79,59 @@ Armed with these ideas, you can now try it on the example given at the end of th
 
 ### Part 1: determine the length of the key
 
-*Relevant functions:* [reduce](https://clojuredocs.org/clojure.core/reduce), [take-nth](https://clojuredocs.org/clojure.core/take-nth), [assoc](https://clojuredocs.org/clojure.core/assoc) (revisited). 
+*Relevant functions:* [reduce](https://clojuredocs.org/clojure.core/reduce), [take-nth](https://clojuredocs.org/clojure.core/take-nth), [rest](https://clojuredocs.org/clojure.core/rest), [assoc](https://clojuredocs.org/clojure.core/assoc) (revisited). 
+
+First of all, you need to use the `take-nth` function to make subsequences n steps apart. Here is how it works:
+```clojure
+(take-nth 3 [1 2 3 4 5 6 7]) ; (1 4 7)
+(take-nth 3 (rest [1 2 3 4 5 6 7])) ; (2 5)
+```
+`rest` function allows you to take the every n-th element (every third in this example) starting at the second one. 
+If you want to skip the first two, you can use `(rest (rest s))`, where `s` is a sequence. 
+
+Another way to start at a position other than the first one is to use `drop`. For instance, if you want to start at the third element, call `drop` with a parameter 2 to drop the first two elements.
+
+Once you have pulled the elements at every n-th position, upto a potential length of the key, you need to see if these frequencies match English frequencies. 
+
+You can use the functions that you wrote for breaking Caesar cipher to compute a hashmap that shows how many times each letter occurs. They are not frequencies, however, just counts. In order to turn them into percentages, you need to divide each count by the total number of elements. 
+
+The function `count` gives you the number of elements in each subsequence. Now you can use the function `reduce` to take apart the hashmap and put it back together with the new values. 
+
+Read the description of reduce above, then take a look at the examples here. 
+
+In its simple form, `reduce` is used to compute a single result from a sequence. For instance, it can be used to add elements in a sequence together:
+```clojure
+(reduce + [1 3 5]) ; 9
+``` 
+It can be a bit more complicated if you want to have a starting point for your computation. For instance, I may want to subtract all my elements from 10: 
+```clojure
+(reduce - 10 [1 3 5]) ; 1
+```
+10 here is used as a starting point, or a *seed* from which the result grows. The operation is then applied first to 10 and the first element, then to the result of it and the second element, and so on. 
+
+In our case we want to reduce a hashmap by changing each value (while keeping the same key) and associating it into the new hashmap. Here is an example that is very similar, but it increments the value, instead of dividing it by the total number of characters:
+```clojure
+(reduce #(assoc %1 (first %2) (inc (second %2))) {} {"a" 2, "b" 5}) ; {"a" 3, "b" 6}
+```
+Here we start with an empty hashmap as a seed. Then for each key/value pair in the hashmap (referred to as `%2` in the anonymous function) we keep the key (which is `(first %2)`) and increment the corresponding value (done by `(inc (second %2))`). Then we use `assoc` to add it to the new resulting hashmap. 
+
+This is a very complex use of `reduce`, so study it carefully and ask questions if you have any. 
+
+**Exercise:** modify the example above to divide each value of the given hashmap by the total number of letters in the subsequence, instead of incrementing it.
+
+Now you can use these functions to try different key lengths and see which of them gives letter frequencies more similar to English: [Relative frequencies of letters in the English language (wikipedia)](https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language) Once you are reasonably sure that you got the right key length, you can try to determine its letters.
 
 ### Part 2: frequency analysis on the subsequences
 
-Here is an example for you to try to break. The key is between two and 8 characters long. Be patient, this may take time. Try to automate you process as much as possible. We also recommend that you work in pairs. 
+Once you have obtained subsequencies of every N-th letter, where N is the likely length of the key, you can use the functions you wrote for breaking Caesar cipher to determine each letter of the key separately. 
+
+The only problem is that you will not know if you are right until you guess the entire key, so you would have to play a bit of a guessing game putting letters together.   
+
+### Part 3: Vigenere challenge 
+
+Here is an example for you to try to break. The key is between two and eight characters long. It is a word and is related to the topic of this workshop.
+
+Be patient, this may take time. Try to automate you process as much as possible. We also recommend that you work in pairs. 
 ```
 rzsrppgeamjllagcpwxismxxcalecwygluetcaguepwwlznpclepcsgcpkgbac
 ltcifstvntybwsepwutzkinweettwgqwjpnweefbwgazgvciebtvyalvyjlowh
