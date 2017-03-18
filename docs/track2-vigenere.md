@@ -48,15 +48,44 @@ Here is a cool feature: if one the given sequences is longer than the other, the
 ```clojure
 (mapv + [6 7 8] (range)) ; [6 8 10]
 ```
-This allows us to use a `cycle` function to generate ab infinite sequence of repeated keyword and then "add" it to text to be encrypted. 
+This allows us to use a `cycle` function to generate an infinite sequence of repeated keyword and then "add" it to text to be encrypted. `cycle` takes a sequence and creates an infinite lazy sequence by repeating the given sequence. For instance,  
+```clojure
+(def cycle1 (cycle [1 2 3])) ; infinite cycle
+(take 10 cycle1) ; (1 2 3 1 2 3 1 2 3 1)
+(def cycle2 (cycle "word")) 
+crypto-solutions=> (take 10 cycle2) ; (\w \o \r \d \w \o \r \d \w \o)
+```
+
+**Exercise:** Use the cycle of a keyword "`cipher"`, `mapv` (or `map`), and the `encrypt-letter` function that you wrote earlier to encrypt the string `"welcometoclojurebridge"`. 
+
+**Exercise:** Once you get it to work, write a function `vigenere-encrypt` that takes a text to encrypt and a keyword and performs the encryption. Just like in the Caesar cipher, you need to first use `get-letters` to get rid of other symbols and convert the letters to lowercase. 
+
+**Exercise:** Now write a function that takes an encrypted string and a keyword and performs the decryption. Note that you will be doing subtraction modulo 26 instead of the addition. 
+<br />
+Make sure that when you encrypt a string with a keyword, you can get it back by decrypting it with the same keyword (except the removal of spaces). 
 
 ## Breaking Vigenere cipher
+It seems like a Vigenere cipher doesn't allow frequency analysis since the same letter may be encrypted in multiple different ways. However, one can actually guess a key by a process that's just slightly more complicated than breaking a Caesar cipher. It also required a longer text. 
+
+Suppose you know 
 
 ### Part 1: determine the length of the key
 
 *Relevant functions:* [reduce](https://clojuredocs.org/clojure.core/reduce), [take-nth](https://clojuredocs.org/clojure.core/take-nth), [assoc](https://clojuredocs.org/clojure.core/assoc) (revisited). 
 
 ### Part 2: frequency analysis on the subsequences
+
+Here is an example for you to try:
+```
+rzsrppgeamjllagcpwxismxxcalecwygluetcaguepwwlznpclepcsgcpkgbac
+ltcifstvntybwsepwutzkinweettwgqwjpnweefbwgazgvciebtvyalvyjlowh
+smhdacdpcqrtobzttlwpznepnpacpqfspxwcomfiazgvciebtvyalvyjlowhhp
+arstwsewlwplwkptgexmfiznudmwddymguepwutzkisqywwmntwxjdrzsbxqfv
+wifvfiytdwoxyoldsmjpnkgbatahsuwceascopwgyinpwzscvazthikhzuwitu
+whcmxtczwsewshlusotvyvciutepwjdvskjijapqywmcjzpkdpdayjtlwsxqkh
+ttwspalgzgwgfakwzxhtceshyietonggsmjhsmopdxghepmbzckajiopclwsep
+wecmkxomfitidbplsaznxgpmvdxjqecmkxomfimijpnsgqlus
+```
 
 ## Are we done? 
 This was a long day! However, I do recommend that now you take a few minutes and go back to the overview page and read the description of Clojure and functional programming again. Hopefully a lot of this now would be something that you can relate to today's experience. 
