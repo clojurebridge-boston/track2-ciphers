@@ -101,7 +101,7 @@ Now you can take as many elements of it as you need, using the function `take`:
 Now going back to descriptions of `map` and `filter`, you would notice that they both return lazy sequences. For instance, you can define an infinite sequence of even numbers by filtering an infinite range with the `even?` function:
 ```clojure
 (def evens (filter even? (range)))
-(0 2 4 6 8 10 12 14 16 18) ; even integers from 0 to 18
+(take 10 evens) ; (0 2 4 6 8 10 12 14 16 18)
 ```
 Also note that `mapv` and `filterv` aren't lazy (such functions are called *eager*), so replacing `filter` by `filterv` above would lead to an infinite evaluation. 
 
