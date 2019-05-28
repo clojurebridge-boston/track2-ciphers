@@ -108,10 +108,10 @@ Now we can encrypt words with Caesar cipher. Let's say we want to encrypt the wo
 Feel free to write this out on paper or in Nightcode before you look at the solution below. 
 
 ```clojure 
-(def s (mapv #(shift % 20) s)) ; encrypt the sequence
+(def s (mapv #(shift % 20) "apple")) ; encrypt the sequence
 (def result (apply str s)) ; convert to a string
 ```
-The result, `"ujjfy"`, is what the encryption of "apple" with the key `20`. 
+The result, `"ujjfy"`, is the encryption of "apple" with the key `20`. 
 
 Instead of saving intermediate results in variables, you can
 also write all the steps in one line of code:
